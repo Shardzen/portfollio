@@ -1,0 +1,96 @@
+=================================================
+GUIDE DE DÉPANNAGE NETLIFY - PORTFOLIO
+=================================================
+
+PROBLÈMES IDENTIFIÉS ET SOLUTIONS :
+===================================
+
+1. PROBLÈME EMAILJS (PRINCIPAL)
+   -----------------------------
+   Votre fichier Contact.js contient des clés EmailJS non configurées :
+   - 'YOUR_SERVICE_ID'
+   - 'YOUR_TEMPLATE_ID'  
+   - 'YOUR_PUBLIC_KEY'
+
+   SOLUTIONS :
+   
+   Option A - Désactiver EmailJS temporairement (RECOMMANDÉ)
+   ---------------------------------------------------------
+   1. Remplacer Contact.js par Contact_BACKUP.js :
+      - Supprimer : src/components/Contact.js
+      - Renommer : Contact_BACKUP.js en Contact.js
+      
+   2. Supprimer la dépendance EmailJS du package.json :
+      Ouvrir package.json et supprimer la ligne :
+      "@emailjs/browser": "^4.3.3",
+   
+   3. Lancer : FIX_NETLIFY.bat
+   
+   Option B - Configurer EmailJS correctement
+   -------------------------------------------
+   1. Créer un compte sur https://www.emailjs.com/
+   2. Récupérer vos clés (Service ID, Template ID, Public Key)
+   3. Remplacer dans Contact.js :
+      - 'YOUR_SERVICE_ID' par votre Service ID
+      - 'YOUR_TEMPLATE_ID' par votre Template ID
+      - 'YOUR_PUBLIC_KEY' par votre Public Key
+   4. Lancer : FIX_NETLIFY.bat
+
+2. VÉRIFICATIONS DE BASE
+   ----------------------
+   ✓ netlify.toml est présent et correctement configuré
+   ✓ Le dossier build contient index.html et static/
+   ✓ Les redirections sont configurées pour le routing React
+
+3. ÉTAPES DE DÉPLOIEMENT
+   ----------------------
+   1. Exécuter FIX_NETLIFY.bat
+   2. Vérifier que le build s'est créé sans erreur
+   3. Se connecter à Netlify (https://app.netlify.com/)
+   4. Glisser-déposer le dossier 'build' sur Netlify
+      OU
+      Lier votre repo GitHub et configurer :
+      - Build command: npm run build
+      - Publish directory: build
+
+4. DIAGNOSTIC DES ERREURS NETLIFY
+   -------------------------------
+   Si le site ne s'affiche pas :
+   
+   a) Page blanche
+      - Ouvrir la console du navigateur (F12)
+      - Chercher des erreurs JavaScript
+      - Vérifier que les fichiers .js et .css se chargent
+   
+   b) Erreur 404
+      - Vérifier que netlify.toml contient les redirections
+      - Vérifier que le fichier _redirects est dans build/
+   
+   c) Erreur de build Netlify
+      - Consulter les logs de build dans Netlify
+      - Vérifier la version de Node.js (ajouter .nvmrc si nécessaire)
+
+5. COMMANDES UTILES
+   ----------------
+   - Tester localement : npm start
+   - Créer un build : npm run build
+   - Nettoyer le cache : npm cache clean --force
+   - Réinstaller : rm -rf node_modules && npm install
+
+6. FICHIERS CRITIQUES
+   ------------------
+   ✓ netlify.toml - Configuration Netlify
+   ✓ build/ - Dossier de production à déployer
+   ✓ public/index.html - Template HTML
+   ✓ src/App.js - Composant principal
+
+SUPPORT
+=======
+Si le problème persiste après avoir suivi ces étapes :
+1. Vérifier les logs de build sur Netlify
+2. Copier l'erreur exacte
+3. Vérifier la console du navigateur (F12)
+
+CONTACT
+=======
+Email : arthur.pineau@ynov.com
