@@ -1,12 +1,14 @@
 import React from "react";
 import { motion } from "framer-motion";
 import {
+  FaHtml5,
+  FaCss3Alt,
+  FaJs,
   FaReact,
   FaNodeJs,
   FaPython,
   FaDocker,
   FaGitAlt,
-  FaJs,
 } from "react-icons/fa";
 import {
   SiNextdotjs,
@@ -19,17 +21,17 @@ import {
 
 const About = () => {
   const skills = [
-    { name: "React", icon: FaReact, color: "#61DAFB", level: 95 },
-    { name: "Next.js", icon: SiNextdotjs, color: "#000000", level: 90 },
-    { name: "TypeScript", icon: SiTypescript, color: "#3178C6", level: 85 },
-    { name: "JavaScript", icon: FaJs, color: "#F7DF1E", level: 95 },
-    { name: "Node.js", icon: FaNodeJs, color: "#339933", level: 88 },
-    { name: "Python", icon: FaPython, color: "#3776AB", level: 80 },
-    { name: "Tailwind", icon: SiTailwindcss, color: "#06B6D4", level: 92 },
-    { name: "MongoDB", icon: SiMongodb, color: "#47A248", level: 85 },
-    { name: "PostgreSQL", icon: SiPostgresql, color: "#4169E1", level: 82 },
-    { name: "Firebase", icon: SiFirebase, color: "#FFCA28", level: 88 },
-    { name: "Docker", icon: FaDocker, color: "#2496ED", level: 78 },
+    { name: "React", icon: FaReact, color: "#61DAFB", level: 30 },
+    { name: "Next.js", icon: SiNextdotjs, color: "#000000", level: 15 },
+    { name: "TypeScript", icon: SiTypescript, color: "#3178C6", level: 20 },
+    { name: "JavaScript", icon: FaJs, color: "#F7DF1E", level: 40 },
+    { name: "Node.js", icon: FaNodeJs, color: "#339933", level: 20 },
+    { name: "Python", icon: FaPython, color: "#3776AB", level: 23 },
+    { name: "Tailwind", icon: SiTailwindcss, color: "#06B6D4", level: 12 },
+    { name: "MongoDB", icon: SiMongodb, color: "#47A248", level: 0 },
+    { name: "PostgreSQL", icon: SiPostgresql, color: "#4169E1", level: 10 },
+    { name: "Firebase", icon: SiFirebase, color: "#FFCA28", level: 5 },
+    { name: "Docker", icon: FaDocker, color: "#2496ED", level: 10 },
     { name: "Git", icon: FaGitAlt, color: "#F05032", level: 90 },
   ];
 
@@ -264,20 +266,35 @@ const About = () => {
                         style={{ color: skill.color }}
                       />
                     </motion.div>
-                    <h4 className="text-lg font-semibold text-white mb-2">
+                    <span className="text-sm font-semibold text-white mb-2">
                       {skill.name}
-                    </h4>
-                    <div className="w-full bg-gray-800 rounded-full h-2 mb-2 overflow-hidden">
+                    </span>
+
+                    {/* Skill level bar */}
+                    <div className="w-full bg-gray-800 rounded-full h-2 mb-1">
                       <motion.div
-                        className="h-full bg-gradient-to-r from-primary to-green-400 rounded-full"
+                        className="h-2 rounded-full"
+                        style={{
+                          background: `linear-gradient(90deg, ${skill.color} 0%, ${skill.color}88 100%)`,
+                        }}
                         initial={{ width: 0 }}
                         whileInView={{ width: `${skill.level}%` }}
-                        transition={{ duration: 1, delay: index * 0.1 }}
+                        transition={{ duration: 1, delay: index * 0.05 }}
                         viewport={{ once: true }}
                       />
                     </div>
-                    <span className="text-sm text-gray-400">{skill.level}%</span>
+                    <span className="text-xs text-gray-500">
+                      {skill.level}%
+                    </span>
                   </div>
+
+                  {/* Glow effect on hover */}
+                  <div
+                    className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"
+                    style={{
+                      background: `radial-gradient(circle at center, ${skill.color}22 0%, transparent 70%)`,
+                    }}
+                  />
                 </motion.div>
               );
             })}
