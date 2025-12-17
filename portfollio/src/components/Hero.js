@@ -178,19 +178,21 @@ const Hero = () => {
         {/* Scroll indicator */}
         <motion.div
           className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          transition={{ delay: 2 }}
+          transition={{ duration: 2, delay: 2 }}
         >
-          <div className="w-6 h-10 border-2 border-primary rounded-full flex justify-center">
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="w-6 h-10 border-2 border-primary rounded-full flex justify-center"
+          >
             <motion.div
               className="w-1.5 h-3 bg-primary rounded-full mt-2"
               animate={{ y: [0, 12, 0], opacity: [1, 0, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             />
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

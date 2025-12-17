@@ -1,14 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
 import {
-  FaHtml5,
-  FaCss3Alt,
-  FaJs,
   FaReact,
   FaNodeJs,
   FaPython,
   FaDocker,
   FaGitAlt,
+  FaJs,
 } from "react-icons/fa";
 import {
   SiNextdotjs,
@@ -266,35 +264,20 @@ const About = () => {
                         style={{ color: skill.color }}
                       />
                     </motion.div>
-                    <span className="text-sm font-semibold text-white mb-2">
+                    <h4 className="text-lg font-semibold text-white mb-2">
                       {skill.name}
-                    </span>
-
-                    {/* Skill level bar */}
-                    <div className="w-full bg-gray-800 rounded-full h-2 mb-1">
+                    </h4>
+                    <div className="w-full bg-gray-800 rounded-full h-2 mb-2 overflow-hidden">
                       <motion.div
-                        className="h-2 rounded-full"
-                        style={{
-                          background: `linear-gradient(90deg, ${skill.color} 0%, ${skill.color}88 100%)`,
-                        }}
+                        className="h-full bg-gradient-to-r from-primary to-green-400 rounded-full"
                         initial={{ width: 0 }}
                         whileInView={{ width: `${skill.level}%` }}
-                        transition={{ duration: 1, delay: index * 0.05 }}
+                        transition={{ duration: 1, delay: index * 0.1 }}
                         viewport={{ once: true }}
                       />
                     </div>
-                    <span className="text-xs text-gray-500">
-                      {skill.level}%
-                    </span>
+                    <span className="text-sm text-gray-400">{skill.level}%</span>
                   </div>
-
-                  {/* Glow effect on hover */}
-                  <div
-                    className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"
-                    style={{
-                      background: `radial-gradient(circle at center, ${skill.color}22 0%, transparent 70%)`,
-                    }}
-                  />
                 </motion.div>
               );
             })}
