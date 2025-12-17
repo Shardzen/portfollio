@@ -1,8 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import {
-  FaHtml5,
-  FaCss3Alt,
   FaJs,
   FaReact,
   FaNodeJs,
