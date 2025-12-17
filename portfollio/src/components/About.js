@@ -18,6 +18,13 @@ import {
 } from "react-icons/si";
 
 const About = () => {
+  const getSkillLevel = (level) => {
+    if (level <= 20) return "Débutant";
+    if (level <= 50) return "Intermédiaire";
+    if (level <= 80) return "Avancé";
+    return "Expert";
+  };
+
   const skills = [
     { name: "React", icon: FaReact, color: "#61DAFB", level: 30 },
     { name: "Next.js", icon: SiNextdotjs, color: "#000000", level: 15 },
@@ -268,21 +275,9 @@ const About = () => {
                       {skill.name}
                     </span>
 
-                    {/* Skill level bar */}
-                    <div className="w-full bg-gray-800 rounded-full h-2 mb-1">
-                      <motion.div
-                        className="h-2 rounded-full"
-                        style={{
-                          background: `linear-gradient(90deg, ${skill.color} 0%, ${skill.color}88 100%)`,
-                        }}
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.level}%` }}
-                        transition={{ duration: 1, delay: index * 0.05 }}
-                        viewport={{ once: true }}
-                      />
-                    </div>
-                    <span className="text-xs text-gray-500">
-                      {skill.level}%
+                    {/* Skill level text */}
+                    <span className="text-xs font-medium px-2 py-1 rounded-full bg-primary/20 text-primary">
+                      {getSkillLevel(skill.level)}
                     </span>
                   </div>
 
