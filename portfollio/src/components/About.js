@@ -37,7 +37,7 @@ const About = () => {
     { name: "PostgreSQL", icon: SiPostgresql, color: "#4169E1", level: 10 },
     { name: "Firebase", icon: SiFirebase, color: "#FFCA28", level: 5 },
     { name: "Docker", icon: FaDocker, color: "#2496ED", level: 10 },
-    { name: "Git", icon: FaGitAlt, color: "#F05032", level: 90 },
+    { name: "Git", icon: FaGitAlt, color: "#F05032", level: 50 },
   ];
 
   const containerVariants = {
