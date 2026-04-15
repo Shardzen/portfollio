@@ -1,10 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
+import { FaExternalLinkAlt, FaGithub, FaReact } from 'react-icons/fa';
 import {
-  SiReact, SiNextdotjs, SiTailwindcss, SiMongodb, SiFirebase,
-  SiNodedotjs, SiSocketdotio, SiRedux, SiPostgresql, SiTypescript,
-  SiStripe, SiChartdotjs
+  SiNextdotjs, SiSocketdotio, SiRedux, SiTypescript, SiChartdotjs
 } from 'react-icons/si';
 
 const Projects = () => {
@@ -17,7 +15,7 @@ const Projects = () => {
       github: '#',
       tags: ['React', 'Tailwind CSS', 'Framer Motion'],
       color: '#00df9a',
-      icon: <SiReact size={56} />,
+      icon: <FaReact size={56} />,
       gradient: 'from-[#00df9a]/20 via-[#0a0a0a] to-[#00df9a]/5',
     },
     {
