@@ -49,8 +49,8 @@ const Footer = () => {
             viewport={{ once: true }}
             className="text-center md:text-left"
           >
-            <h3 className="text-2xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-white to-primary">
-              Arthur.
+            <h3 className="text-2xl font-bold mb-3">
+              <span className="text-white">Arthur</span><span className="text-primary">.</span>
             </h3>
             <p className="text-gray-400 text-sm leading-relaxed">
               Développeur web passionné,<br />

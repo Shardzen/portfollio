@@ -26,18 +26,18 @@ const About = () => {
   };
 
   const skills = [
-    { name: "React", icon: FaReact, color: "#61DAFB", level: 30 },
-    { name: "Next.js", icon: SiNextdotjs, color: "#000000", level: 15 },
-    { name: "TypeScript", icon: SiTypescript, color: "#3178C6", level: 20 },
-    { name: "JavaScript", icon: FaJs, color: "#F7DF1E", level: 40 },
-    { name: "Node.js", icon: FaNodeJs, color: "#339933", level: 20 },
-    { name: "Python", icon: FaPython, color: "#3776AB", level: 23 },
-    { name: "Tailwind", icon: SiTailwindcss, color: "#06B6D4", level: 12 },
-    { name: "MongoDB", icon: SiMongodb, color: "#47A248", level: 0 },
-    { name: "PostgreSQL", icon: SiPostgresql, color: "#4169E1", level: 10 },
-    { name: "Firebase", icon: SiFirebase, color: "#FFCA28", level: 5 },
-    { name: "Docker", icon: FaDocker, color: "#2496ED", level: 10 },
-    { name: "Git", icon: FaGitAlt, color: "#F05032", level: 50 },
+    { name: "JavaScript", icon: FaJs, color: "#F7DF1E", level: 82 },
+    { name: "React", icon: FaReact, color: "#61DAFB", level: 75 },
+    { name: "Git", icon: FaGitAlt, color: "#F05032", level: 78 },
+    { name: "Tailwind", icon: SiTailwindcss, color: "#06B6D4", level: 76 },
+    { name: "Next.js", icon: SiNextdotjs, color: "#9ca3af", level: 62 },
+    { name: "Node.js", icon: FaNodeJs, color: "#339933", level: 60 },
+    { name: "TypeScript", icon: SiTypescript, color: "#3178C6", level: 55 },
+    { name: "Python", icon: FaPython, color: "#3776AB", level: 52 },
+    { name: "MongoDB", icon: SiMongodb, color: "#47A248", level: 48 },
+    { name: "PostgreSQL", icon: SiPostgresql, color: "#4169E1", level: 42 },
+    { name: "Docker", icon: FaDocker, color: "#2496ED", level: 40 },
+    { name: "Firebase", icon: SiFirebase, color: "#FFCA28", level: 38 },
   ];
 
   const containerVariants = {
@@ -98,10 +98,9 @@ const About = () => {
             <span className="text-6xl">👨‍💻</span>
           </motion.div>
           <h2
-            className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-primary to-white"
-            style={{ textShadow: "0 0 30px rgba(0, 223, 154, 0.3)" }}
+            className="text-5xl md:text-7xl font-bold mb-6 text-white"
           >
-            À propos de moi
+            À propos <span className="text-primary">de moi</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             Passionné par le code et l'innovation

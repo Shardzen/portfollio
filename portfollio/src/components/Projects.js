@@ -1,90 +1,95 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
+import {
+  SiReact, SiNextdotjs, SiTailwindcss, SiMongodb, SiFirebase,
+  SiNodedotjs, SiSocketdotio, SiRedux, SiPostgresql, SiTypescript,
+  SiStripe, SiChartdotjs
+} from 'react-icons/si';
 
 const Projects = () => {
   const projects = [
     {
       id: 1,
       title: 'Infrarouge',
-      description: 'Site web moderne et responsive avec animations fluides',
-      image: 'https://placehold.co/800x600/1a1a1a/00df9a?text=Infrarouge',
+      description: 'Site web moderne et responsive avec animations fluides et expérience utilisateur soignée.',
       link: 'https://infrarouge.netlify.app/',
       github: '#',
       tags: ['React', 'Tailwind CSS', 'Framer Motion'],
-      color: '#00df9a'
+      color: '#00df9a',
+      icon: <SiReact size={56} />,
+      gradient: 'from-[#00df9a]/20 via-[#0a0a0a] to-[#00df9a]/5',
     },
     {
       id: 2,
       title: 'E-Commerce Platform',
-      description: 'Plateforme de vente en ligne complète avec paiement intégré',
-      image: 'https://placehold.co/800x600/1a1a1a/3b82f6?text=E-Commerce',
+      description: 'Plateforme de vente en ligne complète avec paiement Stripe intégré et gestion de stock.',
       link: '#',
       github: '#',
       tags: ['Next.js', 'Stripe', 'MongoDB'],
-      color: '#3b82f6'
+      color: '#3b82f6',
+      icon: <SiNextdotjs size={56} />,
+      gradient: 'from-[#3b82f6]/20 via-[#0a0a0a] to-[#3b82f6]/5',
     },
     {
       id: 3,
       title: 'Dashboard Analytics',
-      description: 'Tableau de bord interactif pour visualisation de données',
-      image: 'https://placehold.co/800x600/1a1a1a/8b5cf6?text=Dashboard',
+      description: 'Tableau de bord interactif pour la visualisation de données en temps réel.',
       link: '#',
       github: '#',
       tags: ['React', 'Chart.js', 'Firebase'],
-      color: '#8b5cf6'
+      color: '#8b5cf6',
+      icon: <SiChartdotjs size={56} />,
+      gradient: 'from-[#8b5cf6]/20 via-[#0a0a0a] to-[#8b5cf6]/5',
     },
     {
       id: 4,
       title: 'Social Network',
-      description: 'Réseau social avec messagerie en temps réel',
-      image: 'https://placehold.co/800x600/1a1a1a/ec4899?text=Social+Network',
+      description: 'Réseau social avec messagerie instantanée en temps réel via WebSockets.',
       link: '#',
       github: '#',
       tags: ['React', 'Socket.io', 'Node.js'],
-      color: '#ec4899'
+      color: '#ec4899',
+      icon: <SiSocketdotio size={56} />,
+      gradient: 'from-[#ec4899]/20 via-[#0a0a0a] to-[#ec4899]/5',
     },
     {
       id: 5,
       title: 'Portfolio Builder',
-      description: 'Générateur de portfolio personnalisé et moderne',
-      image: 'https://placehold.co/800x600/1a1a1a/f59e0b?text=Portfolio+Builder',
+      description: 'Générateur de portfolio personnalisé avec éditeur visuel et export instantané.',
       link: '#',
       github: '#',
       tags: ['Next.js', 'TypeScript', 'Tailwind'],
-      color: '#f59e0b'
+      color: '#f59e0b',
+      icon: <SiTypescript size={56} />,
+      gradient: 'from-[#f59e0b]/20 via-[#0a0a0a] to-[#f59e0b]/5',
     },
     {
       id: 6,
       title: 'Task Manager',
-      description: 'Application de gestion de tâches collaborative',
-      image: 'https://placehold.co/800x600/1a1a1a/10b981?text=Task+Manager',
+      description: 'Application de gestion de tâches collaborative avec synchronisation temps réel.',
       link: '#',
       github: '#',
       tags: ['React', 'Redux', 'PostgreSQL'],
-      color: '#10b981'
+      color: '#10b981',
+      icon: <SiRedux size={56} />,
+      gradient: 'from-[#10b981]/20 via-[#0a0a0a] to-[#10b981]/5',
     },
   ];
 
   return (
-    <section id="projects" className="py-20 px-4 relative overflow-hidden">
+    <section id="projects" className="py-24 px-4 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute bottom-0 left-0 w-96 h-96 bg-green-400/10 rounded-full filter blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            x: [0, -30, 0],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
+          className="absolute bottom-0 left-0 w-96 h-96 bg-primary/8 rounded-full filter blur-3xl"
+          animate={{ scale: [1, 1.2, 1], x: [0, -30, 0] }}
+          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
         />
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
+        {/* Header */}
         <motion.div
           className="text-center mb-20"
           initial={{ opacity: 0, y: 50 }}
@@ -92,113 +97,118 @@ const Projects = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <motion.div
-            className="inline-block mb-4"
-            initial={{ scale: 0, rotate: 180 }}
-            whileInView={{ scale: 1, rotate: 0 }}
-            transition={{ duration: 0.5, type: "spring" }}
+          <motion.span
+            className="inline-block text-sm font-semibold text-primary tracking-widest uppercase mb-4 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10"
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <span className="text-6xl">💼</span>
-          </motion.div>
-          <h2 className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-primary to-white"
-              style={{ textShadow: '0 0 30px rgba(0, 223, 154, 0.3)' }}>
-            Mes Projets
+            Portfolio
+          </motion.span>
+          <h2 className="text-5xl md:text-7xl font-bold mb-6 text-white">
+            Mes <span className="text-primary">Projets</span>
           </h2>
-          <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Chaque projet raconte une histoire.<br />
-            <span className="text-primary font-semibold">Découvrez mes créations</span> où code et design s'harmonisent.
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            Chaque projet est une aventure. Voici quelques réalisations où code et design s'harmonisent.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
               viewport={{ once: true }}
-              className="group relative"
+              className="group"
             >
               <motion.div
-                className="relative overflow-hidden rounded-2xl backdrop-blur-xl bg-gray-900/30 border border-gray-800 hover:border-primary/50 transition-all duration-500"
-                whileHover={{ y: -10 }}
+                className="relative overflow-hidden rounded-2xl bg-gray-900/40 border border-gray-800 hover:border-gray-600 transition-all duration-400 h-full flex flex-col"
+                whileHover={{ y: -6 }}
+                transition={{ duration: 0.3 }}
               >
-                {/* Image container */}
-                <div className="relative h-64 overflow-hidden">
-                  <motion.img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover"
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.6 }}
+                {/* Project visual header */}
+                <div className={`relative h-52 overflow-hidden bg-gradient-to-br ${project.gradient}`}>
+                  {/* Grid pattern overlay */}
+                  <div
+                    className="absolute inset-0 opacity-10"
+                    style={{
+                      backgroundImage: `linear-gradient(${project.color}44 1px, transparent 1px), linear-gradient(90deg, ${project.color}44 1px, transparent 1px)`,
+                      backgroundSize: '32px 32px',
+                    }}
                   />
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/50 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
-                  
+                  {/* Center icon */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
+                    <motion.div
+                      style={{ color: project.color }}
+                      className="opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+                      whileHover={{ scale: 1.1 }}
+                    >
+                      {project.icon}
+                    </motion.div>
+                    <span
+                      className="text-xl font-bold tracking-tight"
+                      style={{ color: project.color }}
+                    >
+                      {project.title}
+                    </span>
+                  </div>
+
                   {/* Hover overlay with links */}
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    initial={{ opacity: 0 }}
-                    whileHover={{ opacity: 1 }}
+                    className="absolute inset-0 flex items-center justify-center gap-4 bg-black/70 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   >
                     <motion.a
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-4 bg-primary rounded-full text-dark hover:bg-white transition-colors duration-300"
-                      whileHover={{ scale: 1.1, rotate: 360 }}
+                      className="p-3.5 rounded-full border-2 text-white hover:text-[#0a0a0a] transition-colors duration-300"
+                      style={{ borderColor: project.color, backgroundColor: 'transparent' }}
+                      whileHover={{ scale: 1.1, backgroundColor: project.color }}
                       whileTap={{ scale: 0.9 }}
                     >
-                      <FaExternalLinkAlt size={20} />
+                      <FaExternalLinkAlt size={16} />
                     </motion.a>
                     <motion.a
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-4 bg-gray-800 rounded-full text-white hover:bg-white hover:text-dark transition-colors duration-300"
-                      whileHover={{ scale: 1.1, rotate: -360 }}
+                      className="p-3.5 rounded-full border-2 border-gray-500 text-white hover:border-white transition-colors duration-300"
+                      whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
                     >
-                      <FaGithub size={20} />
+                      <FaGithub size={16} />
                     </motion.a>
                   </motion.div>
                 </div>
 
                 {/* Content */}
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-primary transition-colors duration-300">
+                <div className="p-5 flex flex-col flex-1">
+                  <h3 className="text-lg font-bold text-white mb-2 group-hover:text-primary transition-colors duration-300">
                     {project.title}
                   </h3>
-                  <p className="text-gray-400 mb-4 leading-relaxed">
+                  <p className="text-gray-400 text-sm mb-4 leading-relaxed flex-1">
                     {project.description}
                   </p>
-                  
-                  {/* Tags */}
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map((tag, tagIndex) => (
-                      <motion.span
+                      <span
                         key={tagIndex}
-                        className="px-3 py-1 text-xs font-semibold rounded-full bg-gray-800 text-gray-300 border border-gray-700 group-hover:border-primary/30 transition-colors duration-300"
-                        whileHover={{ 
-                          scale: 1.05,
-                          backgroundColor: 'rgba(0, 223, 154, 0.1)',
-                          color: '#00df9a'
-                        }}
+                        className="px-2.5 py-1 text-xs font-medium rounded-md bg-gray-800 text-gray-400 border border-gray-700/50"
                       >
                         {tag}
-                      </motion.span>
+                      </span>
                     ))}
                   </div>
                 </div>
 
-                {/* Glow effect */}
-                <motion.div
-                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                  style={{
-                    background: `radial-gradient(circle at 50% 0%, ${project.color}15 0%, transparent 70%)`
-                  }}
+                {/* Bottom color accent */}
+                <div
+                  className="h-0.5 w-0 group-hover:w-full transition-all duration-500"
+                  style={{ backgroundColor: project.color }}
                 />
               </motion.div>
             </motion.div>
@@ -210,15 +220,13 @@ const Projects = () => {
           className="text-center mt-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
           viewport={{ once: true }}
         >
-          <p className="text-xl text-gray-400 mb-8">
-            Vous avez un projet en tête ?
-          </p>
+          <p className="text-gray-400 mb-6">Vous avez un projet en tête ?</p>
           <motion.a
             href="#contact"
-            className="inline-block px-10 py-5 bg-gradient-to-r from-primary to-green-400 text-dark font-bold text-lg rounded-full hover:shadow-2xl hover:shadow-primary/50 transition-all duration-300"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-[#0a0a0a] font-bold rounded-full hover:bg-green-400 transition-colors duration-300"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={(e) => {
@@ -226,15 +234,13 @@ const Projects = () => {
               document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
             }}
           >
-            <span className="flex items-center gap-2">
-              Discutons-en ensemble
-              <motion.span
-                animate={{ x: [0, 5, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                →
-              </motion.span>
-            </span>
+            Discutons-en ensemble
+            <motion.span
+              animate={{ x: [0, 4, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            >
+              →
+            </motion.span>
           </motion.a>
         </motion.div>
       </div>

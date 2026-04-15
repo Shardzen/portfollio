@@ -5,6 +5,7 @@ import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import BackgroundAnimation from './components/BackgroundAnimation';
+import Navbar from './components/Navbar';
 
 function App() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -28,6 +29,7 @@ function App() {
           top: mousePosition.y - 10,
         }}
       />
+      <Navbar />
       <Hero />
       <About />
       <Projects />

@@ -23,11 +23,20 @@ html {
 
 .cursor {
   position: fixed;
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
-  background-color: #00df9a;
+  background-color: transparent;
+  border: 2px solid #00df9a;
   pointer-events: none;
   z-index: 9999;
-  transition: transform 0.1s ease;
+  transition: transform 0.12s ease, width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+  mix-blend-mode: normal;
+}
+
+a:hover ~ .cursor,
+button:hover ~ .cursor {
+  width: 32px;
+  height: 32px;
+  background-color: rgba(0, 223, 154, 0.15);
 }

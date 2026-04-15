@@ -75,9 +75,8 @@ const Contact = () => {
           >
             <span className="text-6xl">💬</span>
           </motion.div>
-          <h2 className="text-5xl md:text-7xl font-bold mb-6 text-white bg-clip-text text-transparent bg-gradient-to-r from-white via-primary to-white"
-              style={{ textShadow: '0 0 30px rgba(0, 223, 154, 0.3)' }}>
-            Parlons ensemble
+          <h2 className="text-5xl md:text-7xl font-bold mb-6 text-white">
+            Parlons <span className="text-primary">ensemble</span>
           </h2>
           <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
             Une idée brillante ? Un projet ambitieux ?<br />
@@ -110,7 +109,7 @@ const Contact = () => {
                   htmlFor="name"
                   className="absolute left-6 -top-3 text-sm text-primary bg-gray-900 px-2 transition-all duration-300"
                 >
-                  Votre nom ✨
+                  Votre nom
                 </label>
                 <div className="absolute inset-0 rounded-xl bg-primary/0 group-hover:bg-primary/5 transition-all duration-300 pointer-events-none"></div>
               </div>
@@ -130,7 +129,7 @@ const Contact = () => {
                   htmlFor="email"
                   className="absolute left-6 -top-3 text-sm text-primary bg-gray-900 px-2 transition-all duration-300"
                 >
-                  Votre email 📧
+                  Votre email
                 </label>
                 <div className="absolute inset-0 rounded-xl bg-primary/0 group-hover:bg-primary/5 transition-all duration-300 pointer-events-none"></div>
               </div>
@@ -150,7 +149,7 @@ const Contact = () => {
                   htmlFor="message"
                   className="absolute left-6 -top-3 text-sm text-primary bg-gray-900 px-2 transition-all duration-300"
                 >
-                  Votre message 💭
+                  Votre message
                 </label>
                 <div className="absolute inset-0 rounded-xl bg-primary/0 group-hover:bg-primary/5 transition-all duration-300 pointer-events-none"></div>
               </div>

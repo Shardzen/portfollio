@@ -11,7 +11,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
+    <section className="min-h-screen flex items-center justify-center px-4 pt-20 relative overflow-hidden">
       {/* Animated gradient orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -65,13 +65,13 @@ const Hero = () => {
         </motion.div>
 
         <motion.h1
-          className="text-6xl md:text-8xl lg:text-9xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-primary to-white"
-          style={{ textShadow: '0 0 40px rgba(0, 223, 154, 0.4)' }}
+          className="text-6xl md:text-8xl lg:text-9xl font-bold mb-6"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
         >
-          Arthur<span className="text-primary">.</span>
+          <span className="text-white">Arthur</span>
+          <span className="text-primary" style={{ textShadow: '0 0 40px rgba(0, 223, 154, 0.6)' }}>.</span>
         </motion.h1>
 
         <motion.h2
@@ -135,44 +135,28 @@ const Hero = () => {
 
         {/* Stats */}
         <motion.div
-          className="grid grid-cols-3 gap-8 max-w-3xl mx-auto mt-20"
+          className="flex flex-row items-center justify-center gap-0 max-w-xl mx-auto mt-20 backdrop-blur-xl bg-gray-900/30 border border-gray-800 rounded-2xl overflow-hidden"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1 }}
         >
-          <div className="text-center">
-            <motion.div
-              className="text-4xl md:text-5xl font-bold text-primary mb-2"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 0.5, delay: 1.2, type: "spring" }}
-            >
-              3+
-            </motion.div>
-            <div className="text-gray-400 text-sm md:text-base">Années d'expérience</div>
-          </div>
-          <div className="text-center">
-            <motion.div
-              className="text-4xl md:text-5xl font-bold text-primary mb-2"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 0.5, delay: 1.4, type: "spring" }}
-            >
-              15+
-            </motion.div>
-            <div className="text-gray-400 text-sm md:text-base">Projets réalisés</div>
-          </div>
-          <div className="text-center">
-            <motion.div
-              className="text-4xl md:text-5xl font-bold text-primary mb-2"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 0.5, delay: 1.6, type: "spring" }}
-            >
-              100%
-            </motion.div>
-            <div className="text-gray-400 text-sm md:text-base">Clients satisfaits</div>
-          </div>
+          {[
+            { value: '3+', label: "Années d'exp." },
+            { value: '15+', label: 'Projets' },
+            { value: '100%', label: 'Satisfaction' },
+          ].map((stat, i) => (
+            <div key={i} className={`flex-1 text-center py-6 px-4 ${i < 2 ? 'border-r border-gray-800' : ''}`}>
+              <motion.div
+                className="text-3xl md:text-4xl font-bold text-primary mb-1"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 0.5, delay: 1.2 + i * 0.15, type: 'spring' }}
+              >
+                {stat.value}
+              </motion.div>
+              <div className="text-gray-400 text-xs md:text-sm">{stat.label}</div>
+            </div>
+          ))}
         </motion.div>
 
         {/* Scroll indicator */}
