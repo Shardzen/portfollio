@@ -1,129 +1,100 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import gsap from 'gsap';
+
+const links = [
+  { label: 'À propos', href: '#about' },
+  { label: 'Compétences', href: '#skills' },
+  { label: 'Projets', href: '#projects' },
+  { label: 'Contact', href: '#contact' },
+];
 
 const Navbar = () => {
+  const navRef = useRef(null);
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    gsap.fromTo(navRef.current, { y: -60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, delay: 0.3, ease: 'power3.out' });
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const navLinks = [
-    { label: 'À propos', id: 'about' },
-    { label: 'Projets', id: 'projects' },
-    { label: 'Contact', id: 'contact' },
-  ];
-
-  const scrollTo = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-    setMenuOpen(false);
+  const scrollTo = (href) => {
+    setOpen(false);
+    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <motion.header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? 'backdrop-blur-xl bg-[#0a0a0a]/85 border-b border-gray-800/60 shadow-lg shadow-black/20'
-          : 'bg-transparent'
-      }`}
-      initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
+    <nav
+      ref={navRef}
+      style={{
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
+        background: scrolled ? 'rgba(5,7,15,0.9)' : 'transparent',
+        backdropFilter: scrolled ? 'blur(20px)' : 'none',
+        borderBottom: scrolled ? '1px solid rgba(255,255,255,0.05)' : '1px solid transparent',
+        transition: 'background 0.4s, border-color 0.4s',
+      }}
     >
-      <nav className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        {/* Logo */}
-        <motion.button
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="text-xl font-bold tracking-tight"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <span className="text-white">Arthur</span>
-          <span className="text-primary">.</span>
-        </motion.button>
+      <div style={{ maxWidth: 1152, margin: '0 auto', padding: '0 24px', height: 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: '1.2rem', color: '#eef0f8', letterSpacing: '-0.02em' }}>
+          AP<span style={{ color: '#00d4ff' }}>.</span>
+        </button>
 
-        {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <motion.button
-              key={link.id}
-              onClick={() => scrollTo(link.id)}
-              className="text-gray-400 hover:text-white transition-colors duration-300 text-sm font-medium tracking-wide relative group"
-              whileHover={{ y: -1 }}
-            >
-              {link.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300 rounded-full" />
-            </motion.button>
+        <div className="nav-links">
+          {links.map((l) => (
+            <button key={l.href} onClick={() => scrollTo(l.href)} className="nav-link">
+              {l.label}
+            </button>
           ))}
-          <motion.button
-            onClick={() => scrollTo('contact')}
-            className="px-5 py-2 bg-primary text-[#0a0a0a] font-semibold text-sm rounded-full hover:bg-green-400 transition-colors duration-300"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Me contacter
-          </motion.button>
         </div>
 
-        {/* Mobile hamburger */}
-        <motion.button
-          className="md:hidden flex flex-col gap-1.5 p-2"
-          onClick={() => setMenuOpen(!menuOpen)}
-          whileTap={{ scale: 0.9 }}
-          aria-label="Menu"
-        >
-          <motion.span
-            className="w-5 h-0.5 bg-white block rounded-full"
-            animate={menuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
-            transition={{ duration: 0.25 }}
-          />
-          <motion.span
-            className="w-5 h-0.5 bg-white block rounded-full"
-            animate={menuOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
-            transition={{ duration: 0.25 }}
-          />
-          <motion.span
-            className="w-5 h-0.5 bg-white block rounded-full"
-            animate={menuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
-            transition={{ duration: 0.25 }}
-          />
-        </motion.button>
-      </nav>
+        <div className="nav-badge">
+          <span className="ping-wrapper">
+            <span className="ping-anim" />
+            <span className="ping-dot-static" />
+          </span>
+          <span style={{ fontFamily: 'JetBrains Mono', fontSize: '0.7rem', color: '#4ade80', letterSpacing: '0.05em' }}>Disponible</span>
+        </div>
 
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            className="md:hidden backdrop-blur-xl bg-[#0a0a0a]/95 border-t border-gray-800/50"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="px-6 py-4 flex flex-col gap-1">
-              {navLinks.map((link) => (
-                <button
-                  key={link.id}
-                  onClick={() => scrollTo(link.id)}
-                  className="text-gray-300 hover:text-primary transition-colors duration-200 text-left py-3 border-b border-gray-800/50 font-medium"
-                >
-                  {link.label}
-                </button>
-              ))}
-              <button
-                onClick={() => scrollTo('contact')}
-                className="mt-3 px-5 py-3 bg-primary text-[#0a0a0a] font-semibold rounded-full"
-              >
-                Me contacter
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.header>
+        <button onClick={() => setOpen(!open)} className="hamburger">
+          {[0, 1, 2].map((i) => (
+            <span key={i} style={{
+              display: 'block', width: 22, height: 1, background: '#8892a4', borderRadius: 1, transition: 'transform 0.3s, opacity 0.3s',
+              transform: open && i === 0 ? 'rotate(45deg) translate(4px, 4px)' : open && i === 2 ? 'rotate(-45deg) translate(4px, -4px)' : 'none',
+              opacity: open && i === 1 ? 0 : 1,
+            }} />
+          ))}
+        </button>
+      </div>
+
+      {open && (
+        <div style={{ background: 'rgba(9,12,24,0.97)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.05)', padding: '16px 24px 20px', display: 'flex', flexDirection: 'column', gap: 16 }}>
+          {links.map((l) => (
+            <button key={l.href} onClick={() => scrollTo(l.href)} style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'Inter', fontSize: '0.875rem', color: '#8892a4', textAlign: 'left', padding: 0 }}>
+              {l.label}
+            </button>
+          ))}
+        </div>
+      )}
+
+      <style>{`
+        @keyframes ping { 75%,100%{transform:scale(2.2);opacity:0} }
+        .nav-links { display:flex; align-items:center; gap:32px; }
+        .nav-link { background:none; border:none; cursor:pointer; font-family:Inter; font-size:0.875rem; color:#8892a4; padding:0; transition:color 0.2s; }
+        .nav-link:hover { color:#eef0f8; }
+        .nav-badge { display:flex; align-items:center; gap:8px; padding:6px 14px; border-radius:999px; border:1px solid rgba(34,197,94,0.2); background:rgba(34,197,94,0.06); }
+        .ping-wrapper { position:relative; display:inline-flex; width:7px; height:7px; }
+        .ping-anim { position:absolute; inset:0; border-radius:50%; background:#22c55e; opacity:0.7; animation:ping 1.5s cubic-bezier(0,0,0.2,1) infinite; }
+        .ping-dot-static { position:relative; width:7px; height:7px; border-radius:50%; background:#22c55e; display:inline-block; }
+        .hamburger { background:none; border:none; cursor:pointer; display:none; flex-direction:column; gap:5px; padding:4px; }
+        @media(max-width:767px) {
+          .nav-links { display:none!important; }
+          .nav-badge { display:none!important; }
+          .hamburger { display:flex!important; }
+        }
+      `}</style>
+    </nav>
   );
 };
 

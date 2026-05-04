@@ -1,21 +1,37 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-  ],
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
       colors: {
-        primary: '#00df9a',
-        secondary: '#1E1E1E',
-        dark: '#121212',
-        light: '#E0E0E0',
+        navy: {
+          950: '#05070f',
+          900: '#090c18',
+          800: '#0e1225',
+        },
+        accent: '#00d4ff',
+        glow: '#8b5cf6',
       },
       fontFamily: {
-        sans: ['Poppins', 'sans-serif'],
-        body: ['Roboto', 'sans-serif'],
+        sans: ['Space Grotesk', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
+        body: ['Inter', 'sans-serif'],
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-8px)' },
+        },
+        blink: {
+          '0%, 100%': { opacity: 1 },
+          '50%': { opacity: 0 },
+        },
+      },
+      animation: {
+        float: 'float 4s ease-in-out infinite',
+        blink: 'blink 1s step-end infinite',
       },
     },
   },
   plugins: [],
-}
+};

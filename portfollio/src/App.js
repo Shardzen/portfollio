@@ -1,39 +1,47 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Lenis from 'lenis';
+import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
+import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import BackgroundAnimation from './components/BackgroundAnimation';
-import Navbar from './components/Navbar';
+import Cursor from './components/Cursor';
+
+gsap.registerPlugin(ScrollTrigger);
 
 function App() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
   useEffect(() => {
-    const handleMouseMove = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothTouch: false,
+    });
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+
+    return () => {
+      lenis.destroy();
+      gsap.ticker.remove((time) => lenis.raf(time * 1000));
+    };
   }, []);
 
   return (
-    <div className="App">
-      <BackgroundAnimation />
-      <div
-        className="cursor"
-        style={{
-          left: mousePosition.x - 10,
-          top: mousePosition.y - 10,
-        }}
-      />
+    <div style={{ backgroundColor: '#05070f', color: '#eef0f8', overflowX: 'hidden' }}>
+      <Cursor />
       <Navbar />
-      <Hero />
-      <About />
-      <Projects />
-      <Contact />
+      <main>
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Contact />
+      </main>
       <Footer />
     </div>
   );
