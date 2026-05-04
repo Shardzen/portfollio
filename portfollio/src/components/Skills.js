@@ -51,7 +51,7 @@ const Skills = () => {
 
   return (
     <section ref={sectionRef} id="skills" style={{ padding: '128px 24px', position: 'relative', background: 'rgba(9,12,24,0.4)' }}>
-      <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }} className="grid-bg" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', opacity: 0.4 }} />
+      <div className="grid-bg" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', opacity: 0.4 }} />
 
       <div style={{ maxWidth: 1152, margin: '0 auto', position: 'relative' }}>
         <div className="skill-reveal section-label">
