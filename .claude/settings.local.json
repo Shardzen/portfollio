@@ -3,7 +3,14 @@
     "allow": [
       "Bash(npm run:*)",
       "Bash(npx react-scripts:*)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "WebFetch(domain:api.anthropic.com)",
+      "Bash(cp \"C:\\\\Users\\\\arthu\\\\.claude\\\\projects\\\\C--Users-arthu-Documents-portfollio\\\\2a574689-e30d-4efe-8618-ebb4f6fc50f6\\\\tool-results\\\\webfetch-1778258698236-m3hft5.bin\" /tmp/design.gz)",
+      "Bash(gunzip -f /tmp/design.gz)",
+      "Read(//tmp/**)",
+      "Bash(cp \"C:\\\\Users\\\\arthu\\\\.claude\\\\projects\\\\C--Users-arthu-Documents-portfollio\\\\2a574689-e30d-4efe-8618-ebb4f6fc50f6\\\\tool-results\\\\webfetch-1778258698236-m3hft5.bin\" /tmp/design.tar.gz)",
+      "Bash(mkdir -p /tmp/design_out)",
+      "Bash(tar -xzf /tmp/design.tar.gz -C /tmp/design_out)"
     ]
   }
 }

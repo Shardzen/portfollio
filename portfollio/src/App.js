@@ -1,50 +1,38 @@
-import { useEffect } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Lenis from 'lenis';
+import { useState, useEffect } from 'react';
+import Cursor from './components/Cursor';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import About from './components/About';
-import Skills from './components/Skills';
+import MarqueeSection from './components/MarqueeSection';
+import Services from './components/Services';
 import Projects from './components/Projects';
+import Quote from './components/Quote';
+import Testimonials from './components/Testimonials';
+import About from './components/About';
 import Contact from './components/Contact';
-import Footer from './components/Footer';
-import Cursor from './components/Cursor';
 
-gsap.registerPlugin(ScrollTrigger);
+export default function App() {
+  const [theme, setTheme] = useState('dark');
 
-function App() {
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothTouch: false,
-    });
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
 
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((time) => lenis.raf(time * 1000));
-    gsap.ticker.lagSmoothing(0);
-
-    return () => {
-      lenis.destroy();
-      gsap.ticker.remove((time) => lenis.raf(time * 1000));
-    };
-  }, []);
+  const toggleTheme = () => setTheme(t => t === 'dark' ? 'light' : 'dark');
 
   return (
-    <div style={{ backgroundColor: '#05070f', color: '#eef0f8', overflowX: 'hidden' }}>
+    <>
       <Cursor />
-      <Navbar />
+      <Navbar theme={theme} onToggleTheme={toggleTheme} />
       <main>
         <Hero />
-        <About />
-        <Skills />
+        <MarqueeSection />
+        <Services />
         <Projects />
+        <Quote />
+        <Testimonials />
+        <About />
         <Contact />
       </main>
-      <Footer />
-    </div>
+    </>
   );
 }
-
-export default App;

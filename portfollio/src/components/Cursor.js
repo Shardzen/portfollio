@@ -1,68 +1,49 @@
 import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
 
-const Cursor = () => {
+export default function Cursor() {
   const dotRef = useRef(null);
   const ringRef = useRef(null);
 
   useEffect(() => {
-    const dot = dotRef.current;
-    const ring = ringRef.current;
-    if (!dot || !ring) return;
+    let rx = -200, ry = -200, x = -200, y = -200;
+    let raf = 0;
 
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let ringX = mouseX;
-    let ringY = mouseY;
-
-    const onMove = (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      gsap.to(dot, { x: mouseX, y: mouseY, duration: 0.08, ease: 'power2.out' });
+    const tick = () => {
+      rx += (x - rx) * 0.16;
+      ry += (y - ry) * 0.16;
+      if (dotRef.current)  dotRef.current.style.transform  = `translate3d(${x}px,${y}px,0) translate(-50%,-50%)`;
+      if (ringRef.current) ringRef.current.style.transform = `translate3d(${rx}px,${ry}px,0) translate(-50%,-50%)`;
+      raf = requestAnimationFrame(tick);
     };
 
-    const animateRing = () => {
-      ringX += (mouseX - ringX) * 0.1;
-      ringY += (mouseY - ringY) * 0.1;
-      gsap.set(ring, { x: ringX, y: ringY });
-      requestAnimationFrame(animateRing);
-    };
+    const onMove = (e) => { x = e.clientX; y = e.clientY; };
+    window.addEventListener('mousemove', onMove);
+    raf = requestAnimationFrame(tick);
 
-    document.addEventListener('mousemove', onMove);
-    const frame = requestAnimationFrame(animateRing);
-
-    const onEnter = () => {
-      gsap.to(dot, { scale: 3, opacity: 0.4, duration: 0.2 });
-      gsap.to(ring, { scale: 1.6, borderColor: 'rgba(139,92,246,0.5)', duration: 0.25 });
-    };
-    const onLeave = () => {
-      gsap.to(dot, { scale: 1, opacity: 1, duration: 0.2 });
-      gsap.to(ring, { scale: 1, borderColor: 'rgba(0,212,255,0.35)', duration: 0.25 });
-    };
+    const onEnter = () => { if (ringRef.current) { ringRef.current.style.width = '72px'; ringRef.current.style.height = '72px'; } };
+    const onLeave = () => { if (ringRef.current) { ringRef.current.style.width = '48px'; ringRef.current.style.height = '48px'; } };
 
     const addListeners = () => {
-      document.querySelectorAll('a, button').forEach((el) => {
+      document.querySelectorAll('a, button, [role="button"]').forEach((el) => {
         el.addEventListener('mouseenter', onEnter);
         el.addEventListener('mouseleave', onLeave);
       });
     };
     addListeners();
-    const observer = new MutationObserver(addListeners);
-    observer.observe(document.body, { childList: true, subtree: true });
+    const mo = new MutationObserver(addListeners);
+    mo.observe(document.body, { childList: true, subtree: true });
 
     return () => {
-      document.removeEventListener('mousemove', onMove);
-      cancelAnimationFrame(frame);
-      observer.disconnect();
+      window.removeEventListener('mousemove', onMove);
+      cancelAnimationFrame(raf);
+      mo.disconnect();
     };
   }, []);
 
   return (
     <>
-      <div ref={dotRef} className="cursor-dot" />
-      <div ref={ringRef} className="cursor-ring" />
+      <div ref={dotRef} style={{ position:'fixed', top:0, left:0, width:6, height:6, borderRadius:'50%', background:'#fff', mixBlendMode:'difference', pointerEvents:'none', zIndex:99999 }} />
+      <div ref={ringRef} style={{ position:'fixed', top:0, left:0, width:48, height:48, borderRadius:'50%', background:'rgba(255,255,255,.08)', border:'1px solid rgba(255,255,255,.45)', backdropFilter:'invert(100%)', mixBlendMode:'difference', pointerEvents:'none', zIndex:99998, transition:'width .25s, height .25s' }} />
     </>
   );
-};
-
-export default Cursor;
+}
